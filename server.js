@@ -16,7 +16,7 @@ app.post('/update-user', async (req, res) => {
   try {
     await ssh.connect({
       host: host,
-      port: port,
+      port: 22,
       username: user,
       password: pass
     });

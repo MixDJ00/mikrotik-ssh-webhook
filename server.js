@@ -18,13 +18,13 @@ app.post('/update-user', async (req, res) => {
       host: host,
       port: port,
       username: user,
-      password: pass,
+      password: pass
     });
 
     const command = `/ppp secret set [find name="${oldUser}"] name="${newUser}" password="${newPass}"`;
     const result = await ssh.execCommand(command);
 
-    ssh.dispose(); // đóng kết nối sau khi dùng
+    ssh.dispose();
 
     res.send({ success: true, output: result.stdout || result.stderr });
   } catch (error) {

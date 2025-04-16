@@ -11,8 +11,8 @@ Một webhook trung gian giúp kết nối Google Sheets đến Mikrotik bằng 
 {
   "host": "hoangmproxy.xyz",
   "port": 22,
-  "user": "admin",
-  "pass": "Duong@123",
+  "user": "xxx",
+  "pass": "xxxxxx",
   "newUser": "abcxyz",
   "newPass": "defghi"
 }

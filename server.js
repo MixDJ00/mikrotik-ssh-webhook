@@ -7,9 +7,9 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/update-user', async (req, res) => {
-  const { host, port, user, pass, newUser, newPass } = req.body;
+  const { host, port, user, pass, oldUser, newUser, newPass } = req.body;
 
-  if (!host || !port || !user || !pass || !newUser || !newPass) {
+  if (!host || !port || !user || !pass || !oldUser || !newUser || !newPass) {
     return res.status(400).send({ success: false, error: "Thiếu thông tin đầu vào!" });
   }
 
@@ -18,13 +18,13 @@ app.post('/update-user', async (req, res) => {
       host: host,
       port: port,
       username: user,
-      password: pass
+      password: pass,
     });
 
-    const command = `/ip proxy set [find port=${port}] user=${newUser} password=${newPass}`;
+    const command = `/ppp secret set [find name="${oldUser}"] name="${newUser}" password="${newPass}"`;
     const result = await ssh.execCommand(command);
 
-    ssh.dispose(); // đóng kết nối
+    ssh.dispose(); // đóng kết nối sau khi dùng
 
     res.send({ success: true, output: result.stdout || result.stderr });
   } catch (error) {
